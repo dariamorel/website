@@ -5,8 +5,20 @@ import (
 	"net/http"
 )
 
+type User struct {
+	name                  string
+	age                   uint16
+	money                 int16
+	avg_grades, happiness float64
+}
+
+func (u User) getAllInfo() string {
+	return fmt.Sprintf("name: %s, age: %d, money: %d, grades: %f, happiness: %f", u.name, u.age, u.money, u.avg_grades, u.happiness)
+}
+
 func home_page(page http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(page, "Go is super easy!") // куда выводить и что выводить
+	bob := User{"Bob", 25, -50, 4.2, 0.8}
+	fmt.Fprintf(page, bob.getAllInfo()) // куда выводить и что выводить
 }
 
 // http.ResponseWriter - параметр, позволяющий выводить что-то на страничку
